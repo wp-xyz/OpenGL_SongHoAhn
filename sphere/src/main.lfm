@@ -1,0 +1,116 @@
+object Form1: TForm1
+  Left = 365
+  Height = 471
+  Top = 122
+  Width = 1184
+  Caption = 'Form1'
+  ClientHeight = 471
+  ClientWidth = 1184
+  KeyPreview = True
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyPress = FormKeyPress
+  LCLVersion = '2.1.0.0'
+  object OpenGLControl: TOpenGLControl
+    Left = 0
+    Height = 414
+    Top = 0
+    Width = 1184
+    Align = alClient
+    AutoResizeViewport = True
+    OnKeyPress = OpenGLControlKeyPress
+    OnMouseDown = OpenGLControlMouseDown
+    OnMouseMove = OpenGLControlMouseMove
+    OnMouseWheel = OpenGLControlMouseWheel
+    OnPaint = OpenGLControlPaint
+    OnResize = OpenGLControlResize
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 57
+    Top = 414
+    Width = 1184
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 57
+    ClientWidth = 1184
+    TabOrder = 1
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 6
+      Height = 45
+      Top = 6
+      Width = 153
+      BorderSpacing.Around = 6
+      Caption = 'Left mouse button --> rotate'#13#10'Mouse wheel --> distance'#13#10'''d'' --> toggle display mode '
+      ParentColor = False
+    end
+    object cmbSectorCount: TComboBox
+      AnchorSideLeft.Control = lblSectorCount
+      Left = 191
+      Height = 23
+      Top = 24
+      Width = 73
+      ItemHeight = 15
+      ItemIndex = 1
+      Items.Strings = (
+        '18'
+        '36'
+        '72'
+        '108'
+        '144'
+      )
+      OnChange = cmbSectorCountChange
+      Style = csDropDownList
+      TabOrder = 0
+      Text = '36'
+    end
+    object lblSectorCount: TLabel
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label1
+      Left = 191
+      Height = 15
+      Top = 6
+      Width = 70
+      BorderSpacing.Left = 32
+      Caption = 'Sector count:'
+      ParentColor = False
+    end
+    object cmbStackCount: TComboBox
+      AnchorSideLeft.Control = cmbSectorCount
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = cmbSectorCount
+      Left = 272
+      Height = 23
+      Top = 24
+      Width = 73
+      BorderSpacing.Left = 8
+      ItemHeight = 15
+      ItemIndex = 1
+      Items.Strings = (
+        '9'
+        '18'
+        '36'
+        '54'
+        '72'
+      )
+      OnChange = cmbStackCountChange
+      Style = csDropDownList
+      TabOrder = 1
+      Text = '18'
+    end
+    object lblStackCount: TLabel
+      AnchorSideLeft.Control = cmbStackCount
+      AnchorSideTop.Control = Label1
+      Left = 272
+      Height = 15
+      Top = 6
+      Width = 62
+      Caption = 'Stack count'
+      ParentColor = False
+    end
+  end
+end
