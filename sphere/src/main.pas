@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, OpenGLContext, Forms, Controls, Graphics,
   Dialogs, ExtCtrls, StdCtrls, Types,
-  gl, glu, glut, GLWin32WGLContext,
+  gl, glu, GLWin32WGLContext,
   oglUtils, oglSphere;
 
 

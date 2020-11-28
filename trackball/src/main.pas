@@ -10,7 +10,6 @@ uses
   gl, glu, glut, GLWin32WGLContext,
   oglUtils, vectors, matrices, quaternions, oglTrackball;
 
-
 const
   DEFAULT_ROTANGLE_X = 20;
   DEFAULT_ROTANGLE_Y = 30;
