@@ -287,7 +287,7 @@ begin
   // save the initial ModelView matrix before modifying ModelView matrix
   glPushMatrix();
 
-  // tramsform modelview matrix
+  // transform modelview matrix
   glTranslatef(0, 0, -FCameraDistance);
   glRotatef(FCameraAngleX, 1, 0, 0);   // pitch
   glRotatef(FCameraAngleY, 0, 1, 0);   // heading
