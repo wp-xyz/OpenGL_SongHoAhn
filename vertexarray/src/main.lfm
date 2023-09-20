@@ -1,0 +1,26 @@
+object MainForm: TMainForm
+  Left = 350
+  Height = 419
+  Top = 123
+  Width = 704
+  ActiveControl = OpenGLControl
+  Caption = 'VertexArray'
+  ClientHeight = 419
+  ClientWidth = 704
+  KeyPreview = True
+  LCLVersion = '3.99.0.0'
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  object OpenGLControl: TOpenGLControl
+    Left = 0
+    Height = 419
+    Top = 0
+    Width = 704
+    Align = alClient
+    OnMouseDown = OpenGLControlMouseDown
+    OnMouseMove = OpenGLControlMouseMove
+    OnMouseUp = OpenGLControlMouseUp
+    OnPaint = OpenGLControlPaint
+    OnResize = OpenGLControlResize
+  end
+end

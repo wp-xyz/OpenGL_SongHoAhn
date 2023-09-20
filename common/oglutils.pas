@@ -51,7 +51,6 @@ var
   intfImg: TLazIntfImage;
   viewport: array[0..3] of GLInt;
   rawImg: TRawImage;
-  bmpHandle, maskHandle: THandle;
 begin
   if ABitmap = nil then
     raise Exception.Create('[OpenGLToBitmap] Bitmap must not be nil.');
@@ -74,9 +73,7 @@ begin
     intfImg.SetRawImage(rawImg);
 
     // Convert LazIntfImage to Bitmap
-    intfImg.CreateBitmaps(bmpHandle, maskHandle);
-    ABitmap.Handle := bmpHandle;
-    ABitmap.MaskHandle := maskHandle;
+    ABitmap.LoadFromIntfImage(intfImg);
   finally
     intfImg.Free;
   end;

@@ -47,7 +47,7 @@ type
     procedure BuildVerticesFlat;
     procedure BuildVerticesSmooth;
     procedure ClearArrays;
-    function ComputeFaceNormal(x1,y1,z1, x2,y2,z2, x3,y3,z3: GLFloat): ToglVector3f;
+    function ComputeFaceNormal(x1,y1,z1, x2,y2,z2, x3,y3,z3: GLFloat): ToglArray3f;
     procedure SetParams(ARadius: GLFloat; ASectorCount: Integer;
       AStackCount: Integer; ASmooth: Boolean);
     procedure UpdateRadius;
@@ -56,8 +56,8 @@ type
     constructor Create(ARadius: GLFloat = 1.0; ASectorCount: Integer = 36;
       AStackCount: Integer = 18; ASmooth: Boolean = true);
     procedure Draw;
-    procedure DrawLines(const ALineColor: ToglVector4f);
-    procedure DrawWithLines(const ALineColor: ToglVector4f);
+    procedure DrawLines(const ALineColor: ToglArray4f);
+    procedure DrawWithLines(const ALineColor: ToglArray4f);
     function Info(AFloatFormat: String = '0.000'): String;
 
     property Radius: GLFloat read FRadius write SetRadius;
@@ -223,7 +223,7 @@ var
   tmpVertices: array of TTmpVertex;
   tmpVertexCount: Integer;
   tmpVerticesCapacity: Integer;
-  n: ToglVector3f;  // face normal
+  n: ToglArray3f;  // face normal
   index: Integer;
   i, j, k: Integer;
   vi1, vi2, vi3, vi4: Integer;
@@ -472,7 +472,7 @@ end;
 function ToglSphere.ComputeFaceNormal(
   {v1} x1, y1, z1,
   {v2} x2, y2, z2,
-  {v3} x3, y3, z3: GLFloat): ToglVector3f;
+  {v3} x3, y3, z3: GLFloat): ToglArray3f;
 const
   EPSILON: GLfloat = 0.000001;
 var
@@ -535,7 +535,7 @@ end;
   Draw lines only
   The caller must set the line width before call this
 -------------------------------------------------------------------------------}
-procedure ToglSphere.DrawLines(const ALineColor: ToglVector4f);
+procedure ToglSphere.DrawLines(const ALineColor: ToglArray4f);
 begin
   // set line colour
   glColor4fv(ALineColor);
@@ -559,7 +559,7 @@ end;
   Draw a sphere surfaces and lines on top of it
   The caller must set the line width before call this
 -------------------------------------------------------------------------------}
-procedure ToglSphere.DrawWithLines(const ALineColor: ToglVector4f);
+procedure ToglSphere.DrawWithLines(const ALineColor: ToglArray4f);
 begin
   glEnable(GL_POLYGON_OFFSET_FILL);
   glPolygonOffset(1.0, 1.0);   // move polygon backward

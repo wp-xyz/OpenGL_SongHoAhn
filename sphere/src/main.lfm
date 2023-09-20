@@ -7,10 +7,10 @@ object Form1: TForm1
   ClientHeight = 471
   ClientWidth = 1184
   KeyPreview = True
+  LCLVersion = '3.99.0.0'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyPress = FormKeyPress
-  LCLVersion = '2.1.0.0'
   object OpenGLControl: TOpenGLControl
     Left = 0
     Height = 414
@@ -62,10 +62,10 @@ object Form1: TForm1
         '108'
         '144'
       )
-      OnChange = cmbSectorCountChange
       Style = csDropDownList
       TabOrder = 0
       Text = '36'
+      OnChange = cmbSectorCountChange
     end
     object lblSectorCount: TLabel
       AnchorSideLeft.Control = Label1
@@ -97,10 +97,10 @@ object Form1: TForm1
         '54'
         '72'
       )
-      OnChange = cmbStackCountChange
       Style = csDropDownList
       TabOrder = 1
       Text = '18'
+      OnChange = cmbStackCountChange
     end
     object lblStackCount: TLabel
       AnchorSideLeft.Control = cmbStackCount

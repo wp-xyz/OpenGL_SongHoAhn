@@ -68,7 +68,7 @@ implementation
 {$R *.lfm}
 
 uses
-  Clipbrd, oglTypes, oglTeaPot;
+  Clipbrd, oglTypes, oglTeapotModel;
 
 const
   GL_BGRA = $80E1;
@@ -184,10 +184,10 @@ end;
 -------------------------------------------------------------------------------}
 procedure TForm1.InitLights;
 const
-  AMBIENT: ToglVector4f  = (0.2, 0.2, 0.2, 1.0);    // ambient light
-  DIFFUSE: ToglVector4f  = (0.7, 0.7, 0.7, 1.0);    // diffuse light
-  SPECULAR: ToglVector4f = (1.0, 1.0, 1.0, 1.0);    // specular light
-  LIGHT_POS: ToglVector4f = (0.0, 0.0, 20.0, 0.0);   // positional light
+  AMBIENT: ToglArray4f  = (0.2, 0.2, 0.2, 1.0);    // ambient light
+  DIFFUSE: ToglArray4f  = (0.7, 0.7, 0.7, 1.0);    // diffuse light
+  SPECULAR: ToglArray4f = (1.0, 1.0, 1.0, 1.0);    // specular light
+  LIGHT_POS: ToglArray4f = (0.0, 0.0, 20.0, 0.0);   // positional light
 begin
   // set up light colors (ambient, diffuse, specular)
   glLightfv(GL_LIGHT0, GL_AMBIENT, @AMBIENT);

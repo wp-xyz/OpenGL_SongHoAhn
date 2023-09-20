@@ -1,0 +1,1113 @@
+object MainForm: TMainForm
+  Left = 314
+  Height = 784
+  Top = 130
+  Width = 1121
+  Caption = 'MainForm'
+  ClientHeight = 784
+  ClientWidth = 1121
+  LCLVersion = '3.99.0.0'
+  OnCreate = FormCreate
+  object OpenGLControl: TOpenGLControl
+    Left = 0
+    Height = 518
+    Top = 0
+    Width = 1121
+    Align = alClient
+    OnMouseDown = OpenGLControlMouseDown
+    OnMouseMove = OpenGLControlMouseMove
+    OnMouseUp = OpenGLControlMouseUp
+    OnMouseWheel = OpenGLControlMouseWheel
+    OnPaint = OpenGLControlPaint
+    OnResize = OpenGLControlResize
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 266
+    Top = 518
+    Width = 1121
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 266
+    ClientWidth = 1121
+    TabOrder = 1
+    object gbCamera: TGroupBox
+      AnchorSideLeft.Side = asrCenter
+      Left = 8
+      Height = 243
+      Top = 8
+      Width = 224
+      Caption = 'View (Camera)'
+      ClientHeight = 223
+      ClientWidth = 220
+      TabOrder = 0
+      object tbCameraX: TTrackBar
+        AnchorSideLeft.Control = tbCameraY
+        AnchorSideTop.Control = gbCamera
+        AnchorSideRight.Control = tbCameraY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 0
+        Width = 110
+        Frequency = 10
+        Min = -10
+        Position = 0
+        OnChange = tbViewChange
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object lblCameraX: TLabel
+        AnchorSideTop.Control = tbCameraX
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraX
+        Left = 64
+        Height = 15
+        Top = 5
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'X'
+      end
+      object lblCameraXValue: TLabel
+        AnchorSideLeft.Control = tbCameraX
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraX
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 5
+        Width = 6
+        BorderSpacing.Left = 8
+        BorderSpacing.Right = 8
+        Caption = '0'
+      end
+      object lblCameraY: TLabel
+        AnchorSideLeft.Control = gbCamera
+        AnchorSideTop.Control = tbCameraY
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraY
+        Left = 12
+        Height = 15
+        Top = 34
+        Width = 59
+        BorderSpacing.Left = 12
+        BorderSpacing.Right = 8
+        Caption = 'Position   Y'
+      end
+      object tbCameraY: TTrackBar
+        AnchorSideLeft.Control = lblCameraY
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraX
+        AnchorSideTop.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 29
+        Width = 110
+        Frequency = 10
+        Min = -10
+        Position = 0
+        OnChange = tbViewChange
+        BorderSpacing.Top = 4
+        TabOrder = 1
+      end
+      object lblCameraYValue: TLabel
+        AnchorSideLeft.Control = tbCameraY
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraY
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 34
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object lblCameraZ: TLabel
+        AnchorSideTop.Control = tbCameraZ
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraZ
+        Left = 64
+        Height = 15
+        Top = 63
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Z'
+      end
+      object tbCameraZ: TTrackBar
+        AnchorSideLeft.Control = tbCameraY
+        AnchorSideTop.Control = tbCameraY
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbCameraY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 58
+        Width = 110
+        Frequency = 10
+        Min = -10
+        Position = 0
+        OnChange = tbViewChange
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        TabOrder = 2
+      end
+      object lblCameraZValue: TLabel
+        AnchorSideLeft.Control = tbCameraZ
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraZ
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 63
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object lblCameraPitch: TLabel
+        AnchorSideTop.Control = tbCameraPitch
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraPitch
+        Left = 26
+        Height = 15
+        Top = 104
+        Width = 45
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Pitch (X)'
+      end
+      object tbCameraPitch: TTrackBar
+        AnchorSideLeft.Control = tbCameraY
+        AnchorSideTop.Control = tbCameraZ
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbCameraY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 99
+        Width = 110
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = tbViewChange
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 16
+        TabOrder = 3
+      end
+      object lblCameraPitchValue: TLabel
+        AnchorSideLeft.Control = tbCameraPitch
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraPitch
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 104
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object lblCameraHeading: TLabel
+        AnchorSideTop.Control = tbCameraHeading
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraHeading
+        Left = 8
+        Height = 15
+        Top = 133
+        Width = 63
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Heading (Y)'
+      end
+      object tbCameraHeading: TTrackBar
+        AnchorSideLeft.Control = tbCameraY
+        AnchorSideTop.Control = tbCameraPitch
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbCameraY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 128
+        Width = 110
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = tbViewChange
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        TabOrder = 4
+      end
+      object lblCameraHeadingValue: TLabel
+        AnchorSideLeft.Control = tbCameraHeading
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraHeading
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 133
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object lblCameraRoll: TLabel
+        AnchorSideTop.Control = tbCameraRoll
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraRoll
+        Left = 33
+        Height = 15
+        Top = 162
+        Width = 38
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Roll (Z)'
+      end
+      object tbCameraRoll: TTrackBar
+        AnchorSideLeft.Control = tbCameraY
+        AnchorSideTop.Control = tbCameraHeading
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbCameraY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 157
+        Width = 110
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = tbViewChange
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        BorderSpacing.Bottom = 8
+        TabOrder = 5
+      end
+      object lblCameraRollValue: TLabel
+        AnchorSideLeft.Control = tbCameraRoll
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraRoll
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 162
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object btnResetView: TButton
+        AnchorSideLeft.Control = tbCameraRoll
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = tbCameraRoll
+        AnchorSideTop.Side = asrBottom
+        Left = 67
+        Height = 25
+        Top = 190
+        Width = 134
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        Caption = 'Reset View (Camera)'
+        TabOrder = 6
+        OnClick = btnResetViewClick
+      end
+    end
+    object gbModel: TGroupBox
+      AnchorSideLeft.Side = asrCenter
+      Left = 248
+      Height = 243
+      Top = 8
+      Width = 224
+      Caption = 'Model'
+      ClientHeight = 223
+      ClientWidth = 220
+      TabOrder = 1
+      object tbModelX: TTrackBar
+        AnchorSideLeft.Control = tbModelY
+        AnchorSideTop.Control = gbModel
+        AnchorSideRight.Control = tbModelY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 0
+        Width = 110
+        Frequency = 10
+        Min = -10
+        Position = 0
+        OnChange = tbModelChange
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+      end
+      object lblModelX: TLabel
+        AnchorSideTop.Control = tbModelX
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbModelX
+        Left = 64
+        Height = 15
+        Top = 5
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'X'
+      end
+      object lblModelXValue: TLabel
+        AnchorSideLeft.Control = tbModelX
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbModelX
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 5
+        Width = 6
+        BorderSpacing.Left = 8
+        BorderSpacing.Right = 8
+        Caption = '0'
+      end
+      object lblModelY: TLabel
+        AnchorSideLeft.Control = gbModel
+        AnchorSideTop.Control = tbModelY
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbModelY
+        Left = 12
+        Height = 15
+        Top = 34
+        Width = 59
+        BorderSpacing.Left = 12
+        BorderSpacing.Right = 8
+        Caption = 'Position   Y'
+      end
+      object tbModelY: TTrackBar
+        AnchorSideLeft.Control = lblModelY
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbModelX
+        AnchorSideTop.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 29
+        Width = 110
+        Frequency = 10
+        Min = -10
+        Position = 0
+        OnChange = tbModelChange
+        BorderSpacing.Top = 4
+        TabOrder = 1
+      end
+      object lblModelYValue: TLabel
+        AnchorSideLeft.Control = tbModelY
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbModelY
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 34
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object lblModelZ: TLabel
+        AnchorSideTop.Control = tbModelZ
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbModelZ
+        Left = 64
+        Height = 15
+        Top = 63
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Z'
+      end
+      object tbModelZ: TTrackBar
+        AnchorSideLeft.Control = tbModelY
+        AnchorSideTop.Control = tbModelY
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbModelY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 58
+        Width = 110
+        Frequency = 10
+        Min = -10
+        Position = 0
+        OnChange = tbModelChange
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        TabOrder = 2
+      end
+      object lblModelZValue: TLabel
+        AnchorSideLeft.Control = tbModelZ
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbModelZ
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 63
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object lblModelRotX: TLabel
+        AnchorSideTop.Control = tbModelRotX
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbModelRotX
+        Left = 64
+        Height = 15
+        Top = 104
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'X'
+      end
+      object tbModelRotX: TTrackBar
+        AnchorSideLeft.Control = tbModelY
+        AnchorSideTop.Control = tbModelZ
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbModelY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 99
+        Width = 110
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = tbModelChange
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 16
+        TabOrder = 3
+      end
+      object lblModelRotXValue: TLabel
+        AnchorSideLeft.Control = tbModelRotX
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbModelRotX
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 104
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object lblModelRotY: TLabel
+        AnchorSideTop.Control = tbModelRotY
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbModelRotY
+        Left = 10
+        Height = 15
+        Top = 133
+        Width = 61
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Rotation   Y'
+      end
+      object tbModelRotY: TTrackBar
+        AnchorSideLeft.Control = tbModelY
+        AnchorSideTop.Control = tbModelRotX
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbModelY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 128
+        Width = 110
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = tbModelChange
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        TabOrder = 4
+      end
+      object lblModelRotYValue: TLabel
+        AnchorSideLeft.Control = tbModelRotY
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbModelRotY
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 133
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object lblModelRotZ: TLabel
+        AnchorSideTop.Control = tbModelRotZ
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbModelRotZ
+        Left = 64
+        Height = 15
+        Top = 162
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Z'
+      end
+      object tbModelRotZ: TTrackBar
+        AnchorSideLeft.Control = tbModelY
+        AnchorSideTop.Control = tbModelRotY
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbModelY
+        AnchorSideRight.Side = asrBottom
+        Left = 79
+        Height = 25
+        Top = 157
+        Width = 110
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = tbModelChange
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        BorderSpacing.Bottom = 8
+        TabOrder = 5
+      end
+      object lblModelRotZValue: TLabel
+        AnchorSideLeft.Control = tbModelRotZ
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbModelRotZ
+        AnchorSideTop.Side = asrCenter
+        Left = 197
+        Height = 15
+        Top = 162
+        Width = 6
+        BorderSpacing.Left = 8
+        Caption = '0'
+      end
+      object btnResetModel: TButton
+        AnchorSideLeft.Control = tbModelRotZ
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = tbModelRotZ
+        AnchorSideTop.Side = asrBottom
+        Left = 89
+        Height = 25
+        Top = 190
+        Width = 91
+        AutoSize = True
+        BorderSpacing.Bottom = 8
+        Caption = 'Reset Model'
+        TabOrder = 6
+        OnClick = btnResetModelClick
+      end
+    end
+    object gbViewMatrixDisplay: TGroupBox
+      Left = 488
+      Height = 152
+      Top = 8
+      Width = 192
+      Caption = 'View Matrix'
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.TopBottomSpacing = 8
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
+      ChildSizing.ShrinkVertical = crsHomogenousChildResize
+      ChildSizing.Layout = cclTopToBottomThenLeftToRight
+      ChildSizing.ControlsPerLine = 4
+      ClientHeight = 132
+      ClientWidth = 188
+      TabOrder = 2
+      object lblVM0: TLabel
+        Left = 8
+        Height = 29
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM0'
+        Layout = tlCenter
+      end
+      object lblVM1: TLabel
+        Left = 8
+        Height = 29
+        Top = 37
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM1'
+        Layout = tlCenter
+      end
+      object lblVM2: TLabel
+        Left = 8
+        Height = 29
+        Top = 66
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM2'
+        Layout = tlCenter
+      end
+      object lblVM3: TLabel
+        Left = 8
+        Height = 29
+        Top = 95
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM3'
+        Layout = tlCenter
+      end
+      object lblVM4: TLabel
+        Left = 48
+        Height = 29
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM4'
+        Layout = tlCenter
+      end
+      object lblVM5: TLabel
+        Left = 48
+        Height = 29
+        Top = 37
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM5'
+        Layout = tlCenter
+      end
+      object lblVM6: TLabel
+        Left = 48
+        Height = 29
+        Top = 66
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM6'
+        Layout = tlCenter
+      end
+      object lblVM7: TLabel
+        Left = 48
+        Height = 29
+        Top = 95
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM7'
+        Layout = tlCenter
+      end
+      object lblVM8: TLabel
+        Left = 88
+        Height = 29
+        Top = 8
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM8'
+        Layout = tlCenter
+      end
+      object lblVM9: TLabel
+        Left = 88
+        Height = 29
+        Top = 37
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM9'
+        Layout = tlCenter
+      end
+      object lblVM10: TLabel
+        Left = 88
+        Height = 29
+        Top = 66
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM10'
+        Layout = tlCenter
+      end
+      object lblVM11: TLabel
+        Left = 88
+        Height = 29
+        Top = 95
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM11'
+        Layout = tlCenter
+      end
+      object lblVM12: TLabel
+        Left = 134
+        Height = 29
+        Top = 8
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM12'
+        Layout = tlCenter
+      end
+      object lblVM13: TLabel
+        Left = 134
+        Height = 29
+        Top = 37
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM13'
+        Layout = tlCenter
+      end
+      object lblVM14: TLabel
+        Left = 134
+        Height = 29
+        Top = 66
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM14'
+        Layout = tlCenter
+      end
+      object lblVM15: TLabel
+        Left = 134
+        Height = 29
+        Top = 95
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM15'
+        Layout = tlCenter
+      end
+    end
+    object gbModelMatrixDisplay: TGroupBox
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = gbViewMatrixDisplay
+      Left = 701
+      Height = 152
+      Top = 8
+      Width = 192
+      Caption = 'Model Matrix'
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.TopBottomSpacing = 8
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
+      ChildSizing.ShrinkVertical = crsHomogenousChildResize
+      ChildSizing.Layout = cclTopToBottomThenLeftToRight
+      ChildSizing.ControlsPerLine = 4
+      ClientHeight = 132
+      ClientWidth = 188
+      TabOrder = 3
+      object lblMM0: TLabel
+        Left = 8
+        Height = 29
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM0'
+        Layout = tlCenter
+      end
+      object lblMM1: TLabel
+        Left = 8
+        Height = 29
+        Top = 37
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM1'
+        Layout = tlCenter
+      end
+      object lblMM2: TLabel
+        Left = 8
+        Height = 29
+        Top = 66
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM2'
+        Layout = tlCenter
+      end
+      object lblMM3: TLabel
+        Left = 8
+        Height = 29
+        Top = 95
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM3'
+        Layout = tlCenter
+      end
+      object lblMM4: TLabel
+        Left = 48
+        Height = 29
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM4'
+        Layout = tlCenter
+      end
+      object lblMM5: TLabel
+        Left = 48
+        Height = 29
+        Top = 37
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM5'
+        Layout = tlCenter
+      end
+      object lblMM6: TLabel
+        Left = 48
+        Height = 29
+        Top = 66
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM6'
+        Layout = tlCenter
+      end
+      object lblMM7: TLabel
+        Left = 48
+        Height = 29
+        Top = 95
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM7'
+        Layout = tlCenter
+      end
+      object lblMM8: TLabel
+        Left = 88
+        Height = 29
+        Top = 8
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM8'
+        Layout = tlCenter
+      end
+      object lblMM9: TLabel
+        Left = 88
+        Height = 29
+        Top = 37
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM9'
+        Layout = tlCenter
+      end
+      object lblMM10: TLabel
+        Left = 88
+        Height = 29
+        Top = 66
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM10'
+        Layout = tlCenter
+      end
+      object lblMM11: TLabel
+        Left = 88
+        Height = 29
+        Top = 95
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM11'
+        Layout = tlCenter
+      end
+      object lblMM12: TLabel
+        Left = 134
+        Height = 29
+        Top = 8
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM12'
+        Layout = tlCenter
+      end
+      object lblMM13: TLabel
+        Left = 134
+        Height = 29
+        Top = 37
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM13'
+        Layout = tlCenter
+      end
+      object lblMM14: TLabel
+        Left = 134
+        Height = 29
+        Top = 66
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM14'
+        Layout = tlCenter
+      end
+      object lblMM15: TLabel
+        Left = 134
+        Height = 29
+        Top = 95
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM15'
+        Layout = tlCenter
+      end
+    end
+    object Label1: TLabel
+      AnchorSideLeft.Control = gbViewMatrixDisplay
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = gbViewMatrixDisplay
+      AnchorSideTop.Side = asrCenter
+      Left = 688
+      Height = 15
+      Top = 77
+      Width = 5
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      Caption = '*'
+    end
+    object gbModelMatrixDisplay1: TGroupBox
+      AnchorSideLeft.Control = Label2
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = gbViewMatrixDisplay
+      Left = 917
+      Height = 152
+      Top = 8
+      Width = 192
+      Caption = 'ModelView Matrix'
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.TopBottomSpacing = 8
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
+      ChildSizing.ShrinkVertical = crsHomogenousChildResize
+      ChildSizing.Layout = cclTopToBottomThenLeftToRight
+      ChildSizing.ControlsPerLine = 4
+      ClientHeight = 132
+      ClientWidth = 188
+      TabOrder = 4
+      object lblMVM0: TLabel
+        Left = 8
+        Height = 29
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM0'
+        Layout = tlCenter
+      end
+      object lblMVM1: TLabel
+        Left = 8
+        Height = 29
+        Top = 37
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM1'
+        Layout = tlCenter
+      end
+      object lblMVM2: TLabel
+        Left = 8
+        Height = 29
+        Top = 66
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM2'
+        Layout = tlCenter
+      end
+      object lblMVM3: TLabel
+        Left = 8
+        Height = 29
+        Top = 95
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM3'
+        Layout = tlCenter
+      end
+      object lblMVM4: TLabel
+        Left = 48
+        Height = 29
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM4'
+        Layout = tlCenter
+      end
+      object lblMVM5: TLabel
+        Left = 48
+        Height = 29
+        Top = 37
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM5'
+        Layout = tlCenter
+      end
+      object lblMVM6: TLabel
+        Left = 48
+        Height = 29
+        Top = 66
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM6'
+        Layout = tlCenter
+      end
+      object lblMVM7: TLabel
+        Left = 48
+        Height = 29
+        Top = 95
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblVM7'
+        Layout = tlCenter
+      end
+      object lblMVM8: TLabel
+        Left = 88
+        Height = 29
+        Top = 8
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM8'
+        Layout = tlCenter
+      end
+      object lblMVM9: TLabel
+        Left = 88
+        Height = 29
+        Top = 37
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM9'
+        Layout = tlCenter
+      end
+      object lblMVM10: TLabel
+        Left = 88
+        Height = 29
+        Top = 66
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM10'
+        Layout = tlCenter
+      end
+      object lblMVM11: TLabel
+        Left = 88
+        Height = 29
+        Top = 95
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM11'
+        Layout = tlCenter
+      end
+      object lblMVM12: TLabel
+        Left = 134
+        Height = 29
+        Top = 8
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM12'
+        Layout = tlCenter
+      end
+      object lblMVM13: TLabel
+        Left = 134
+        Height = 29
+        Top = 37
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM13'
+        Layout = tlCenter
+      end
+      object lblMVM14: TLabel
+        Left = 134
+        Height = 29
+        Top = 66
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM14'
+        Layout = tlCenter
+      end
+      object lblMVM15: TLabel
+        Left = 134
+        Height = 29
+        Top = 95
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblVM15'
+        Layout = tlCenter
+      end
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = gbModelMatrixDisplay
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = gbViewMatrixDisplay
+      AnchorSideTop.Side = asrCenter
+      Left = 901
+      Height = 15
+      Top = 77
+      Width = 8
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      Caption = '='
+    end
+  end
+end
