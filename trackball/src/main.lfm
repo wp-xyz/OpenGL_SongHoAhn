@@ -7,10 +7,10 @@ object Form1: TForm1
   ClientHeight = 471
   ClientWidth = 622
   KeyPreview = True
+  LCLVersion = '3.99.0.0'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyPress = FormKeyPress
-  LCLVersion = '2.1.0.0'
   object OpenGLControl: TOpenGLControl
     Left = 0
     Height = 384

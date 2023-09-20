@@ -47,10 +47,12 @@
       <Unit2>
         <Filename Value="..\..\common\ogltypes.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="oglTypes"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\..\common\oglutils.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="oglUtils"/>
       </Unit3>
       <Unit4>
         <Filename Value="vectors.pas"/>
