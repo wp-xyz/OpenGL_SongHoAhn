@@ -24,7 +24,7 @@ type
     gbTargetPosition: TGroupBox;
     gbCameraMatrixDisplay: TGroupBox;
     gbCameraQuaternionDisplay: TGroupBox;
-    ImageList1: TImageList;
+    ImageList: TImageList;
     lblTargetPosX: TLabel;
     lblTargetPosXValue: TLabel;
     lblTargetPosY: TLabel;
@@ -76,6 +76,7 @@ type
     tbYaw: TTrackBar;
     tbRoll: TTrackBar;
     tbCameraPosY: TTrackBar;
+    procedure btnAboutClick(Sender: TObject);
     procedure btnResetCameraClick(Sender: TObject);
     procedure cbShowFOVChange(Sender: TObject);
     procedure cbShowGridChange(Sender: TObject);
@@ -93,7 +94,6 @@ type
     procedure OpenGLControl1Resize(Sender: TObject);
     procedure OpenGLControl2Paint(Sender: TObject);
     procedure OpenGLControl2Resize(Sender: TObject);
-    procedure btnAboutClick(Sender: TObject);
     procedure UpdateController(Sender: TObject);
   private
     FController: ToglOrbitController;

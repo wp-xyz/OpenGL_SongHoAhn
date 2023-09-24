@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils,
-  LCLIntf, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls;
+  LCLIntf, Forms, Controls, Graphics, StdCtrls, ExtCtrls;
 
 type
 
@@ -73,6 +73,7 @@ end;
 
 procedure TAboutForm.SetCopyright(const AValue: String);
 begin
+  FCopyRight := AValue;
   lblCopyright.Caption := Format(
     'Copyright (c) %s Song Ho Ahn' + LineEnding +
     'Lazarus port by Werner Pamler', [FCopyright]);

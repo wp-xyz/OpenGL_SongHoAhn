@@ -6,9 +6,9 @@ interface
 
 uses
   Classes, SysUtils, Types, Math,
-  Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, ComCtrls,
+  Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, ComCtrls, Buttons,
   gl, glu, OpenGLContext,
-  oglTypes, oglMath, oglCameraModel, oglTeapotModel;
+  oglTypes, oglMath, oglCameraModel, oglTeapotModel, oglAbout;
 
 type
 
@@ -22,6 +22,7 @@ type
     gbModelMatrixDisplay1: TGroupBox;
     gbViewMatrixDisplay: TGroupBox;
     gbModelMatrixDisplay: TGroupBox;
+    ImageList: TImageList;
     Label1: TLabel;
     Label2: TLabel;
     lblMVM0: TLabel;
@@ -98,6 +99,7 @@ type
     lblVM9: TLabel;
     OpenGLControl: TOpenGLControl;
     Panel1: TPanel;
+    btnAbout: TSpeedButton;
     tbCameraHeading: TTrackBar;
     tbModelRotY: TTrackBar;
     tbModelRotX: TTrackBar;
@@ -110,6 +112,7 @@ type
     tbModelY: TTrackBar;
     tbCameraZ: TTrackBar;
     tbModelZ: TTrackBar;
+    procedure btnAboutClick(Sender: TObject);
     procedure btnResetViewClick(Sender: TObject);
     procedure btnResetModelClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -619,6 +622,19 @@ begin
   OpenGLControl.Invalidate;
   UpdateViewController;
   UpdateMatrixDisplay;
+end;
+
+procedure TMainForm.btnAboutClick(Sender: TObject);
+begin
+  with TAboutForm.Create(nil) do
+    try
+      Title := 'OpenGL ModelView Matrix';
+      URL := 'www.songho.ca/opengl/gl_camera.html';
+      Copyright := '2008-2018';
+      ShowModal;
+    finally
+      Free;
+    end;
 end;
 
 procedure TMainForm.btnResetModelClick(Sender: TObject);

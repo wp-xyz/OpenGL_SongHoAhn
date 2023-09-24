@@ -4,6 +4,7 @@ object AboutForm: TAboutForm
   Top = 130
   Width = 358
   AutoSize = True
+  BorderStyle = bsDialog
   Caption = 'About'
   ClientHeight = 172
   ClientWidth = 358
@@ -15,10 +16,11 @@ object AboutForm: TAboutForm
     AnchorSideTop.Control = Image1
     Left = 132
     Height = 15
-    Top = 8
+    Top = 24
     Width = 25
     BorderSpacing.Left = 24
-    BorderSpacing.Right = 8
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 16
     Caption = 'Title'
     Font.Style = [fsBold]
     ParentFont = False
@@ -29,10 +31,10 @@ object AboutForm: TAboutForm
     AnchorSideTop.Side = asrBottom
     Left = 132
     Height = 15
-    Top = 27
+    Top = 41
     Width = 21
-    BorderSpacing.Top = 4
-    BorderSpacing.Right = 8
+    BorderSpacing.Top = 2
+    BorderSpacing.Right = 16
     Caption = 'URL'
     Font.Color = clBlue
     ParentColor = False
@@ -50,7 +52,7 @@ object AboutForm: TAboutForm
     Top = 78
     Width = 162
     Anchors = [akLeft, akBottom]
-    BorderSpacing.Right = 8
+    BorderSpacing.Right = 16
     Caption = 'Copyright (c) %s Song Ho Ahn'#13#10'Lazarus port by Werner Pamler'
   end
   object Image1: TImage
