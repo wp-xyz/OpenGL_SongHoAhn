@@ -10,10 +10,14 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   object OpenGLControl1: TOpenGLControl
-    Left = 12
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Bevel1
+    Left = 0
     Height = 389
-    Top = 4
-    Width = 412
+    Top = 0
+    Width = 426
+    Anchors = [akTop, akLeft, akRight]
     OnMouseDown = OpenGLControl1MouseDown
     OnMouseMove = OpenGLControl1MouseMove
     OnMouseUp = OpenGLControl1MouseUp
@@ -22,10 +26,16 @@ object MainForm: TMainForm
     OnResize = OpenGLControl1Resize
   end
   object OpenGLControl2: TOpenGLControl
-    Left = 432
+    AnchorSideLeft.Control = Bevel1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 428
     Height = 389
-    Top = 4
-    Width = 412
+    Top = 0
+    Width = 427
+    Anchors = [akTop, akLeft, akRight]
     OnPaint = OpenGLControl2Paint
     OnResize = OpenGLControl2Resize
   end
@@ -745,6 +755,16 @@ object MainForm: TMainForm
       ImageIndex = 0
       OnClick = btnAboutClick
     end
+  end
+  object Bevel1: TBevel
+    AnchorSideLeft.Control = Owner
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Control = Owner
+    Left = 426
+    Height = 59
+    Top = 0
+    Width = 2
+    Shape = bsSpacer
   end
   object ImageList1: TImageList
     Scaled = True

@@ -15,6 +15,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    Bevel1: TBevel;
     btnResetCamera: TButton;
     cbShowFOV: TCheckBox;
     cbShowGrid: TCheckBox;
