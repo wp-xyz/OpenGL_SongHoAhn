@@ -1,0 +1,868 @@
+object MainForm: TMainForm
+  Left = 314
+  Height = 612
+  Top = 130
+  Width = 855
+  Caption = 'Orbit Camera'
+  ClientHeight = 612
+  ClientWidth = 855
+  LCLVersion = '3.99.0.0'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  object OpenGLControl1: TOpenGLControl
+    Left = 12
+    Height = 389
+    Top = 4
+    Width = 412
+    OnMouseDown = OpenGLControl1MouseDown
+    OnMouseMove = OpenGLControl1MouseMove
+    OnMouseUp = OpenGLControl1MouseUp
+    OnMouseWheel = OpenGLControl1MouseWheel
+    OnPaint = OpenGLControl1Paint
+    OnResize = OpenGLControl1Resize
+  end
+  object OpenGLControl2: TOpenGLControl
+    Left = 432
+    Height = 389
+    Top = 4
+    Width = 412
+    OnPaint = OpenGLControl2Paint
+    OnResize = OpenGLControl2Resize
+  end
+  object ParamPanel: TPanel
+    Left = 8
+    Height = 192
+    Top = 412
+    Width = 839
+    Align = alBottom
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 192
+    ClientWidth = 839
+    TabOrder = 2
+    object gbAngles: TGroupBox
+      AnchorSideLeft.Control = ParamPanel
+      AnchorSideTop.Control = ParamPanel
+      Left = 0
+      Height = 127
+      Top = 0
+      Width = 228
+      Caption = 'Angles (Degrees)'
+      ClientHeight = 107
+      ClientWidth = 224
+      TabOrder = 0
+      object lblPitch: TLabel
+        AnchorSideLeft.Control = gbAngles
+        AnchorSideTop.Control = tbPitch
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbPitch
+        Left = 12
+        Height = 15
+        Top = 13
+        Width = 45
+        BorderSpacing.Left = 12
+        BorderSpacing.Right = 8
+        Caption = 'Pitch (X)'
+      end
+      object tbPitch: TTrackBar
+        AnchorSideLeft.Control = lblPitch
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = gbAngles
+        Left = 65
+        Height = 25
+        Top = 8
+        Width = 124
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = UpdateController
+        BorderSpacing.Top = 8
+        TabOrder = 0
+      end
+      object lblPitchValue: TLabel
+        AnchorSideLeft.Control = tbPitch
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbPitch
+        AnchorSideTop.Side = asrCenter
+        Left = 193
+        Height = 15
+        Top = 13
+        Width = 6
+        BorderSpacing.Left = 4
+        BorderSpacing.Right = 8
+        Caption = '0'
+      end
+      object lblYaw: TLabel
+        AnchorSideTop.Control = tbYaw
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbYaw
+        Left = 18
+        Height = 15
+        Top = 46
+        Width = 39
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Yaw (Y)'
+      end
+      object tbYaw: TTrackBar
+        AnchorSideLeft.Control = tbPitch
+        AnchorSideTop.Control = tbPitch
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbPitch
+        AnchorSideRight.Side = asrBottom
+        Left = 65
+        Height = 25
+        Top = 41
+        Width = 124
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = UpdateController
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 8
+        TabOrder = 1
+      end
+      object lblYawValue: TLabel
+        AnchorSideLeft.Control = tbYaw
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbYaw
+        AnchorSideTop.Side = asrCenter
+        Left = 193
+        Height = 15
+        Top = 46
+        Width = 6
+        BorderSpacing.Left = 4
+        Caption = '0'
+      end
+      object lblRoll: TLabel
+        AnchorSideTop.Control = tbRoll
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbRoll
+        Left = 19
+        Height = 15
+        Top = 79
+        Width = 38
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Roll (Z)'
+      end
+      object tbRoll: TTrackBar
+        AnchorSideLeft.Control = tbPitch
+        AnchorSideTop.Control = tbYaw
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbPitch
+        AnchorSideRight.Side = asrBottom
+        Left = 65
+        Height = 25
+        Top = 74
+        Width = 124
+        Frequency = 60
+        Max = 180
+        Min = -180
+        Position = 0
+        OnChange = UpdateController
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 8
+        BorderSpacing.Bottom = 8
+        TabOrder = 2
+      end
+      object lblRollValue: TLabel
+        AnchorSideLeft.Control = tbRoll
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbRoll
+        AnchorSideTop.Side = asrCenter
+        Left = 193
+        Height = 15
+        Top = 79
+        Width = 6
+        BorderSpacing.Left = 4
+        Caption = '0'
+      end
+    end
+    object gbCameraPosition: TGroupBox
+      AnchorSideLeft.Control = gbAngles
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ParamPanel
+      Left = 244
+      Height = 127
+      Top = 0
+      Width = 184
+      BorderSpacing.Left = 16
+      Caption = 'Camera Position'
+      ClientHeight = 107
+      ClientWidth = 180
+      TabOrder = 1
+      object lblCameraPosX: TLabel
+        AnchorSideLeft.Control = gbCameraPosition
+        AnchorSideTop.Control = tbCameraPosX
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraPosX
+        Left = 12
+        Height = 15
+        Top = 13
+        Width = 7
+        BorderSpacing.Left = 12
+        BorderSpacing.Right = 8
+        Caption = 'X'
+      end
+      object tbCameraPosX: TTrackBar
+        AnchorSideLeft.Control = lblCameraPosX
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = gbCameraPosition
+        Left = 27
+        Height = 25
+        Top = 8
+        Width = 124
+        Frequency = 2
+        Min = -10
+        Position = 0
+        OnChange = UpdateController
+        BorderSpacing.Top = 8
+        TabOrder = 0
+      end
+      object lblCameraPosXValue: TLabel
+        AnchorSideLeft.Control = tbCameraPosX
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraPosX
+        AnchorSideTop.Side = asrCenter
+        Left = 155
+        Height = 15
+        Top = 13
+        Width = 6
+        BorderSpacing.Left = 4
+        BorderSpacing.Right = 8
+        Caption = '0'
+      end
+      object lblCameraPosY: TLabel
+        AnchorSideTop.Control = tbCameraPosY
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraPosY
+        Left = 12
+        Height = 15
+        Top = 46
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Y'
+      end
+      object tbCameraPosY: TTrackBar
+        AnchorSideLeft.Control = tbCameraPosX
+        AnchorSideTop.Control = tbCameraPosX
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbCameraPosX
+        AnchorSideRight.Side = asrBottom
+        Left = 27
+        Height = 25
+        Top = 41
+        Width = 124
+        Frequency = 2
+        Min = -10
+        Position = 0
+        OnChange = UpdateController
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 8
+        TabOrder = 1
+      end
+      object lblCameraPosYValue: TLabel
+        AnchorSideLeft.Control = tbCameraPosY
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraPosY
+        AnchorSideTop.Side = asrCenter
+        Left = 155
+        Height = 15
+        Top = 46
+        Width = 6
+        BorderSpacing.Left = 4
+        Caption = '0'
+      end
+      object lblCameraPosZ: TLabel
+        AnchorSideTop.Control = tbCameraPosZ
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbCameraPosZ
+        Left = 12
+        Height = 15
+        Top = 79
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Z'
+      end
+      object tbCameraPosZ: TTrackBar
+        AnchorSideLeft.Control = tbCameraPosX
+        AnchorSideTop.Control = tbCameraPosY
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbCameraPosX
+        AnchorSideRight.Side = asrBottom
+        Left = 27
+        Height = 25
+        Top = 74
+        Width = 124
+        Frequency = 2
+        Min = -10
+        Position = 0
+        OnChange = UpdateController
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 8
+        BorderSpacing.Bottom = 8
+        TabOrder = 2
+      end
+      object lblCameraPosZValue: TLabel
+        AnchorSideLeft.Control = tbCameraPosZ
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbCameraPosZ
+        AnchorSideTop.Side = asrCenter
+        Left = 155
+        Height = 15
+        Top = 79
+        Width = 6
+        BorderSpacing.Left = 4
+        Caption = '0'
+      end
+    end
+    object gbTargetPosition: TGroupBox
+      AnchorSideLeft.Control = gbCameraPosition
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ParamPanel
+      Left = 444
+      Height = 127
+      Top = 0
+      Width = 184
+      BorderSpacing.Left = 16
+      Caption = 'Camera Target'
+      ClientHeight = 107
+      ClientWidth = 180
+      TabOrder = 2
+      object lblTargetPosX: TLabel
+        AnchorSideLeft.Control = gbTargetPosition
+        AnchorSideTop.Control = tbTargetPosX
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbTargetPosX
+        Left = 12
+        Height = 15
+        Top = 13
+        Width = 7
+        BorderSpacing.Left = 12
+        BorderSpacing.Right = 8
+        Caption = 'X'
+      end
+      object tbTargetPosX: TTrackBar
+        AnchorSideLeft.Control = lblTargetPosX
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = gbTargetPosition
+        Left = 27
+        Height = 25
+        Top = 8
+        Width = 124
+        Frequency = 2
+        Min = -10
+        Position = 0
+        OnChange = UpdateController
+        BorderSpacing.Top = 8
+        TabOrder = 0
+      end
+      object lblTargetPosXValue: TLabel
+        AnchorSideLeft.Control = tbTargetPosX
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbTargetPosX
+        AnchorSideTop.Side = asrCenter
+        Left = 155
+        Height = 15
+        Top = 13
+        Width = 6
+        BorderSpacing.Left = 4
+        BorderSpacing.Right = 8
+        Caption = '0'
+      end
+      object lblTargetPosY: TLabel
+        AnchorSideTop.Control = tbTargetPosY
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbTargetPosY
+        Left = 12
+        Height = 15
+        Top = 46
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Y'
+      end
+      object tbTargetPosY: TTrackBar
+        AnchorSideLeft.Control = tbTargetPosX
+        AnchorSideTop.Control = tbTargetPosX
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbTargetPosX
+        AnchorSideRight.Side = asrBottom
+        Left = 27
+        Height = 25
+        Top = 41
+        Width = 124
+        Frequency = 2
+        Min = -10
+        Position = 0
+        OnChange = UpdateController
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 8
+        TabOrder = 1
+      end
+      object lblTargetPosYValue: TLabel
+        AnchorSideLeft.Control = tbTargetPosY
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbTargetPosY
+        AnchorSideTop.Side = asrCenter
+        Left = 155
+        Height = 15
+        Top = 46
+        Width = 6
+        BorderSpacing.Left = 4
+        Caption = '0'
+      end
+      object lblTargetPosZ: TLabel
+        AnchorSideTop.Control = tbTargetPosZ
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = tbTargetPosZ
+        Left = 12
+        Height = 15
+        Top = 79
+        Width = 7
+        Anchors = [akTop, akRight]
+        BorderSpacing.Right = 8
+        Caption = 'Z'
+      end
+      object tbTargetPosZ: TTrackBar
+        AnchorSideLeft.Control = tbTargetPosX
+        AnchorSideTop.Control = tbTargetPosY
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = tbTargetPosX
+        AnchorSideRight.Side = asrBottom
+        Left = 27
+        Height = 25
+        Top = 74
+        Width = 124
+        Frequency = 2
+        Min = -10
+        Position = 0
+        OnChange = UpdateController
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 8
+        BorderSpacing.Bottom = 8
+        TabOrder = 2
+      end
+      object lblTargetPosZValue: TLabel
+        AnchorSideLeft.Control = tbTargetPosZ
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = tbTargetPosZ
+        AnchorSideTop.Side = asrCenter
+        Left = 155
+        Height = 15
+        Top = 79
+        Width = 6
+        BorderSpacing.Left = 4
+        Caption = '0'
+      end
+    end
+    object gbCameraMatrixDisplay: TGroupBox
+      AnchorSideLeft.Control = gbTargetPosition
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ParamPanel
+      Left = 644
+      Height = 128
+      Top = 0
+      Width = 192
+      BorderSpacing.Left = 16
+      Caption = 'Camera Matrix (column-major)'
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.TopBottomSpacing = 8
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
+      ChildSizing.ShrinkVertical = crsHomogenousChildResize
+      ChildSizing.Layout = cclTopToBottomThenLeftToRight
+      ChildSizing.ControlsPerLine = 4
+      ClientHeight = 108
+      ClientWidth = 188
+      TabOrder = 3
+      object lblCM0: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblCM0'
+        Layout = tlCenter
+      end
+      object lblCM1: TLabel
+        Left = 8
+        Height = 23
+        Top = 31
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblCM1'
+        Layout = tlCenter
+      end
+      object lblCM2: TLabel
+        Left = 8
+        Height = 23
+        Top = 54
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblCM2'
+        Layout = tlCenter
+      end
+      object lblCM3: TLabel
+        Left = 8
+        Height = 23
+        Top = 77
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblCM3'
+        Layout = tlCenter
+      end
+      object lblCM4: TLabel
+        Left = 48
+        Height = 23
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblCM4'
+        Layout = tlCenter
+      end
+      object lblCM5: TLabel
+        Left = 48
+        Height = 23
+        Top = 31
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblCM5'
+        Layout = tlCenter
+      end
+      object lblCM6: TLabel
+        Left = 48
+        Height = 23
+        Top = 54
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblCM6'
+        Layout = tlCenter
+      end
+      object lblCM7: TLabel
+        Left = 48
+        Height = 23
+        Top = 77
+        Width = 40
+        Alignment = taCenter
+        Caption = 'lblCM7'
+        Layout = tlCenter
+      end
+      object lblCM8: TLabel
+        Left = 88
+        Height = 23
+        Top = 8
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblCM8'
+        Layout = tlCenter
+      end
+      object lblCM9: TLabel
+        Left = 88
+        Height = 23
+        Top = 31
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblCM9'
+        Layout = tlCenter
+      end
+      object lblCM10: TLabel
+        Left = 88
+        Height = 23
+        Top = 54
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblCM10'
+        Layout = tlCenter
+      end
+      object lblCM11: TLabel
+        Left = 88
+        Height = 23
+        Top = 77
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblCM11'
+        Layout = tlCenter
+      end
+      object lblCM12: TLabel
+        Left = 134
+        Height = 23
+        Top = 8
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblCM12'
+        Layout = tlCenter
+      end
+      object lblCM13: TLabel
+        Left = 134
+        Height = 23
+        Top = 31
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblCM13'
+        Layout = tlCenter
+      end
+      object lblCM14: TLabel
+        Left = 134
+        Height = 23
+        Top = 54
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblCM14'
+        Layout = tlCenter
+      end
+      object lblCM15: TLabel
+        Left = 134
+        Height = 23
+        Top = 77
+        Width = 46
+        Alignment = taCenter
+        Caption = 'lblCM15'
+        Layout = tlCenter
+      end
+    end
+    object gbCameraQuaternionDisplay: TGroupBox
+      AnchorSideLeft.Control = gbCameraMatrixDisplay
+      AnchorSideTop.Control = gbCameraMatrixDisplay
+      AnchorSideTop.Side = asrBottom
+      Left = 644
+      Height = 48
+      Top = 144
+      Width = 192
+      BorderSpacing.Top = 16
+      Caption = 'Camera Quaternion (s, x, y, z)'
+      ChildSizing.LeftRightSpacing = 8
+      ChildSizing.TopBottomSpacing = 8
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsHomogenousChildResize
+      ChildSizing.ShrinkVertical = crsHomogenousChildResize
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 4
+      ClientHeight = 28
+      ClientWidth = 188
+      TabOrder = 4
+      object lblCQs: TLabel
+        Left = 8
+        Height = 12
+        Top = 8
+        Width = 43
+        Alignment = taCenter
+        Caption = 'lblCQs'
+        Layout = tlCenter
+      end
+      object lblCQx: TLabel
+        Left = 51
+        Height = 12
+        Top = 8
+        Width = 44
+        Alignment = taCenter
+        Caption = 'lblCQx'
+        Layout = tlCenter
+      end
+      object lblCQy: TLabel
+        Left = 95
+        Height = 12
+        Top = 8
+        Width = 44
+        Alignment = taCenter
+        Caption = 'lblCQy'
+        Layout = tlCenter
+      end
+      object lblCQz: TLabel
+        Left = 139
+        Height = 12
+        Top = 8
+        Width = 41
+        Alignment = taCenter
+        Caption = 'lblXQz'
+        Layout = tlCenter
+      end
+    end
+    object cbShowFOV: TCheckBox
+      AnchorSideLeft.Control = cbShowGrid
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = btnResetCamera
+      AnchorSideTop.Side = asrCenter
+      Left = 241
+      Height = 19
+      Top = 159
+      Width = 117
+      BorderSpacing.Left = 16
+      Caption = 'Show Field of View'
+      Checked = True
+      State = cbChecked
+      TabOrder = 5
+      OnChange = cbShowFOVChange
+    end
+    object cbShowGrid: TCheckBox
+      AnchorSideLeft.Control = btnAbout
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = btnResetCamera
+      AnchorSideTop.Side = asrCenter
+      Left = 154
+      Height = 19
+      Top = 159
+      Width = 71
+      BorderSpacing.Left = 24
+      Caption = 'Show grid'
+      Checked = True
+      State = cbChecked
+      TabOrder = 6
+      OnChange = cbShowGridChange
+    end
+    object btnResetCamera: TButton
+      AnchorSideLeft.Control = ParamPanel
+      AnchorSideTop.Control = gbCameraQuaternionDisplay
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 25
+      Top = 156
+      Width = 98
+      AutoSize = True
+      Caption = 'Reset Camera'
+      TabOrder = 7
+      OnClick = btnResetCameraClick
+    end
+    object btnAbout: TSpeedButton
+      AnchorSideLeft.Control = btnResetCamera
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = gbCameraQuaternionDisplay
+      AnchorSideTop.Side = asrCenter
+      Left = 106
+      Height = 24
+      Top = 156
+      Width = 24
+      BorderSpacing.Left = 8
+      Images = ImageList1
+      ImageIndex = 0
+      OnClick = btnAboutClick
+    end
+  end
+  object ImageList1: TImageList
+    Scaled = True
+    Left = 143
+    Top = 320
+    Bitmap = {
+      4C7A0100000010000000100000007A0200000000000078DA6D534B4C53411425
+      603446053F50D4989868A226C5050B3F2B10379A68342228210641E3FF13AB18
+      05318A0B0B8D0174E5AE7E82D8851BA3095B169A40908AF493B6B4A5F4435B2C
+      B4F2AAEFBDA6EF3877CA2BA676929399BC3767CEBD67CE0028402EBCE6B50859
+      4E2260D171D09ABEE5DBFB2F2213E569CFB7B7CAB45994874DF1E467832C7CEA
+      96C5AFFD71C56716D393C36F101ED7E4E5866D158A6F6C561CEC9112FA1ACC3F
+      DA83D8C34A44EF6911BCB50D7EDD0E243E744A8A77344A7B737589FB7B40A708
+      FA6A240D0741B3F04E875FAFAF237C7717FC37B6C27B5183705F9DC2CF987195
+      A97CAA591AEC958823F51E86FCFC08C49E43404A82C21059AC61EA72395CCDC5
+      9833754869CFC82BD52BEA976A4E76D7407E7114CACB3A7E46DAFF0329DF77CC
+      B6ED465047FC8D986C2981A3653DD2BE31116E770979CBBC4ACC3FDE0BA1AB9A
+      EBAAFA82BE8AFBA07AE0BD94D1B7352CC3C290318190ED0482D6D624F338D651
+      89F893FD99BEBB0E60E16915D74E4D8D21DCBA13819BD47F199C4DAB603D5588
+      D8409B8480F536C31DE1A35E220D3A83F4E29DFBF8AC8E906E3B7C5737C37D7E
+      1D1C6756C2525FC0F8ED52261B13B57FBEF427680FF91CBDAF65A8E0B33AA6AF
+      6D81E742299C6757C3DA50C4F9D9FAC93F968D00BB5FBA23EA53853A88EB6A5E
+      037BE372CEB537152FF947F7C77245D9F0B0FEC863DF954DFCAE1459E4205D7B
+      E30ACE25FC7CDF2EA6BD23C6A5EC8D6B2813E1BE7A85FC55117C560BBFE138F3
+      BB28CB0D188E517E2208394AFFCBAF67343A677A2039CF6DE01CEBE9C22C8F6A
+      66FF44CE9DB16AF3BE019649CA15F5260C19E3EC8E6402ADE91BAF3957371F78
+      AE98B7D9F7CBD68B5EE5E22F8CD0E186
+    }
+    BitmapAdv = {
+      4C69020000004C7A010000001800000018000000940400000000000078DA9D55
+      6B505465183690CC9AAE160658895D4C9B049529EDAA398297A69A2E804499B7
+      8032A82C750A4D082B856D3145A7A6B149A0C61F3259E138368E2317EB8FD38C
+      67CF7247D89B14B2777697F6F2F4BEDF39BBE0A248EDCC3BE7FCD8F37CEFFB3C
+      CFFB7C0026E0AA756A220CAD89B0B4CC17C5EF402CC6F5ED1865D2AF8459AE85
+      4972D213232B64941CF4AC8151BFE23FE39AE5B984798671825D7F04BC27F6C2
+      595D04FB815C58AB56C176301FEEFA0A043B7F0F88F34C52134CBA94F161EBB3
+      E9FFBE60677360F0C74DB0952C80ED93340C6C9B878B1FA7E0AF2DB37161D303
+      30154D87E19DBBD1FFF51A04DA1B0284EF8549CEBC0A7616F513F29FAD0BBACA
+      D3E1DCF9045C9F3D0947D96370942E80757B9A72C6E6D9B0BC7F1F8C84DF937F
+      277A0A67C0D35C1BE46FAF7886C2898FB19D3B9F82FB8B45F0EC7E866A090677
+      2D865BB30C437FFE02DFD9A3B8B86321FA3E9C09F3BBC9E87D2B11DD1B6E47E7
+      BA29F034D504C51C4669CE682DA533CC897377BAC0F66AD231A45D8EA1CA15F0
+      69323074B20AE19FBBBE1C7D9B67C1F2DEBD306EBC0BE7DFBC031D6B6E46475E
+      22FC6D0D8190F15CC3657C02E6DB459C0C52DF8CEDDFFB1C82552FE09F3D2BE1
+      6F3C18C1F7FCB60F7F6F7988F0158ECEE74D45E7DA5BD0F6DAF5B054662A1EB3
+      C8CB467053CB3E612D19DF53BE44F4CDD8C1FD2FC2FFD5B3F07DBB1A219B0541
+      9B1976EDF30A3E6BC0FDE7C5ABF893A1CFB996F46E26BDE56A153F96FDCD1EB4
+      924F9C658FC34D7CFBBECC50FA266C9E857560AD6D258F60A03895349E350ABF
+      357732E4AC1858EB3E55F683B18D6D493C8FABA64878907DC238ACADB76229E9
+      B05460BB3F274D7E2A81FBC836F2502AE9FBA0AA6F12BA99FF376E22FCEBA0CB
+      BC0666ADCA518F3E0116298DDF6DFB73D1FFD11C3183A374A1EA4DF6D1D3E23C
+      EFD1D208FFCEC35B951D289C8EDE820474AF9F82F6D537A235671274AF4C40EF
+      8E45AA066A9ED03BEF2573CAFEB66E9F0F3BF160A75944953C0AEFA96F86FD73
+      621FF53E03868DD3C83BF1E85A77ABD0569F3D51C12F59ACE2EBE789ACE2FEBF
+      2BA09EEE17BBC373F039CCD740F15C519E930722F8AEE37B04EFA2F70D6AEFAF
+      4E12DC33FE25FC080D2487FB9806E6A264A159DF0733C5399C053C133FB9E7F0
+      CF714C3BBC57E47BEEBD65559CC0E6B2D59591BEE7ECF4D718D59F3501CA2ACE
+      1353E13D942DC96277F8AC70398F5746F0EDBF5628D8E499F6D76FB8045BCE8E
+      45A043F8F350C4FF17E4E53C0F6715CFCC9E30BC3D4D70C0FBC33C3BEA35117C
+      DBCFBBA86FF63B6193DFC3BC7059B4592AF7BA8CA87C68E21CE4ACE2DED8D33D
+      F953C56EF2FBC0E1E2087EFF0F5B154EA2B05BD7DE46F9D048F9209D1E9D3F72
+      2A6713E7206715E709CFCF7D32C75D054970341C82FDF4F7685F1F1FF1CA302F
+      71186CAAA67C933C30B63C7CF9FB8AB2953296CFE8C84B103DF2CEB7D15EF2EE
+      70BF8C2BD30E8DC4E6BE05B692CF2F8F7D27D2193407E72067953E274EE1200A
+      33AC25F3CD9C88BE2DBA97C677EFEA524206A99175622F588F940A4FF35E72F1
+      3B678CF089B88F89EF2B713256B1AF2807D5BB3CEA7E277FB307A37DF2FF2A46
+      C92A354F94BD8C19CFB7FF02352586264C7A0100000020000000200000004606
+      00000000000078DAD557796C14751486A29C552B72A878818822CAE18150E8A1
+      20820AE108E5B005E4564E69396AC11E400F4AB182621AFF538852A3F18E46E3
+      F197683472EC6C5B0AEDB6DB3DBA6D69BBDB6E2FBACFF7BD99D99DEE82563031
+      4EF2B293DFEECEF7DEF7BE770C11F5A0FF87F522BB399AEC4A1ED9949FD88AD9
+      9A342BD2CE72F9FB28F9EDBF856BB5F6239B69273FDBC546DDB46AB29977C87F
+      AF05BB4A89E36759F5E75E327D47DECFB3A9E1E852AACB9941AE9409E44C7E98
+      5C7B63A8E6D05C727F944AED67BE36FA514976D382ABC0EEC9FF4D63F309EEA9
+      2FC953B08C2EA63E2656B7E711AA4D194F35AF8EA5EA1D0F9233E97EB2BD722F
+      556DBE872A370C23C7BEA7A8E5E70F741FF819E66C7E665837B1C3F83F27F05F
+      9FF50C790B7751E3DE48834DA686F427A83EF571F1437CD8A9F9B075045937DD
+      4596976EA3B2B543A8A660353FE3B4E687E9FD6EF950A5640A76D9AFD4FCCE0A
+      F2EC9F4A9ECC686ACA8A214F56B4987BFF146AC89814F08173E0DC3E9A1CDBEE
+      D338B8832CEB86D285D503C99A1E4B97CE9F547DB02BFBFE067B21F842DC4D8C
+      ED66ECA6EC586A3EC07C1E9C4EDEDCE972DF941D432D853BA9D35DC3E622F7BB
+      9BC9B5EB210307773207B752D99A4174FEC59BC89A16ADF3E0BBA21E44E7AAD6
+      BC85C982DD9C132B98AD879EA1B6D76789E1DE9B3B8D7C8CAD5F9D8DD51A070F
+      905D74703755700ECAD70E66FC082A5936809C6F260434595EDE3704DFAE24E3
+      FB8E3FBE606E238567C40ABCF6379EA38E23B3D9E6505BFEB3D49A378382AFDA
+      9471ACC5D164DF36527250F1F2ED8C3F842EACBA99CE317EF10B7DA9E564A1E6
+      83797B486FD1EADB5390203A03C7881D3103BBF3EDF9D479743E751C9ECD6733
+      C9E731C6EF621D8E131D02DFB605F8C3A87CDD103ABF3282CE2D0F67FC3E64D9
+      1DA973E0ECD2A3D0D7A4BEBF154D097E568CF0ACE2CF219FE0CF137CC9C7C729
+      E203F2E039BE956A19DFC5F88E44D6A001FFC24AC41F4E454B7B93B2288C5A99
+      5F4D8B530DDCE749DE3FCB94FA86B6A1792FF867AEC179FBE1E7D5D8F367C959
+      73CE935C1B51528B175F7B54EB052AFF56E45FF8E7FC037FB9861F174635EF25
+      EA1CE41A74FF23CE1ADE5A22F58467BAF74DA166D6BEF7C034D507E61C71E31E
+      675287FC9B86F48954B77B82E8AF5AD7DFA6007E29EB1FF907BE29AE67200776
+      E57B3FBE4D3987B3BAECA7A5AFD533078D1993B5FA8B111E900BE04AFD716E5A
+      4EEC08AABF315AFD0D57EB6F3DEAEF16C6BF914AE2FB9179C9F5645AD8834A37
+      0CD7E32F36E07B70867E0E1E114F7D1AEB80F380183D9951920FB5F74C9533E0
+      1AEB4FADBD91FE1E2CB95F35904A5768F88BAF137C737C7F1DDF63C077E3CC99
+      0C0D8DF1FB205AE05C34A44F123ED4DECB7D2F6D6248FD391247F9FBAFBFF6A1
+      7D8D7B684FF013C275FC46037E89C49F112D1CA28E541FC68B1EA0AF7A6DF6E0
+      1E67C197BFEF20EF887DB51A7B31C75EA4712FFC6FF4F35F64A8BF1F7086198A
+      E7389346493F474E5DAC2BF882FA523FC78AD6822F681EBCAB791FE4EF7BA87B
+      65512F3FBE65CF65F467570EE20CF31B318047D49170C179C58C456D8317D418
+      721D7CC9CCD1B051F3A5CB6F08891D567B6CBB3E0F730CF851386B3FFB8D3C07
+      39B46D19AEFAC17CC017187A8B7E1F7C59D60F959CA3DF02BB24A1BF602B5C73
+      46FC36DE2554FCB39141FDB71AE78EAC99A29F0AE61275043EC4B8A741DB30F8
+      177C09E7ACB7D2151AB668AE5717ECA0FEDB7517C0BEC6DFB5FDFE29EB67A8CC
+      6FEC11F0A5927B29FA29F20B7DE12CF8C29CF5C7CDD8E6C55DB14DDCFB5A7EF9
+      50C5AF521243E61F662266237458B04A6A173195AD192C7AC62C533F078B75D4
+      DBFDD81D176DEA8CD3FA4C70DC304760FE5A2E3B7F4507BC1BC8FE719AAA3262
+      A5778253E4147D5CFD8C10B3E7C7890FB0AABC05325FD163F43A375A79CA24F2
+      559ED1F60FF3BCBFDC81B0236116F2CE644D8D623E07C8FC427CEA67B8702C06
+      7D2FEDA3E186C6AC6307F62F7346F7F64FDE1565FF3CCD7B4B3C15710DA38E81
+      A57EF6F6F37CB978F57C3B8EC4EB71C38ECB5EDDEDFD5BDE3964FF6EFDED13AA
+      4C8B55B1B89E826B2A34E6C901ADFDF3FDDB908BB3F3F9FF15FAFB44DBA9AF64
+      7EA38ED047314B60A51B47485FAB399624BF31BC7F5898F3B9D7F40E2475C1FB
+      1A6AB6FBEF5FF86DD215757E7516263B93BC63CABC28D2E6B647EED5B3039CB7
+      2957C5F57F647F02635CA18F
+    }
+  end
+end
