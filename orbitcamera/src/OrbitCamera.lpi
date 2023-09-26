@@ -36,7 +36,6 @@
       <Unit>
         <Filename Value="OrbitCamera.lpr"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
       </Unit>
       <Unit>
         <Filename Value="main.pas"/>
@@ -49,37 +48,31 @@
       <Unit>
         <Filename Value="oglorbitcamera.pas"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
         <UnitName Value="oglOrbitCamera"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\common\oglmath.pas"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
         <UnitName Value="oglMath"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\common\ogltypes.pas"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
         <UnitName Value="oglTypes"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\common\oglcameramodel.pas"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
         <UnitName Value="oglCameraModel"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\common\oglteapotmodel.pas"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
         <UnitName Value="oglTeapotModel"/>
       </Unit>
       <Unit>
         <Filename Value="oglorbitcontroller.pas"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
         <UnitName Value="oglOrbitController"/>
       </Unit>
       <Unit>

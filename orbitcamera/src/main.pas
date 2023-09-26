@@ -36,26 +36,6 @@ type
     lblCameraPosXValue: TLabel;
     lblCameraPosZ: TLabel;
     lblCameraPosZValue: TLabel;
-    lblCM0: TLabel;
-    lblCM1: TLabel;
-    lblCM10: TLabel;
-    lblCM11: TLabel;
-    lblCM12: TLabel;
-    lblCM13: TLabel;
-    lblCM14: TLabel;
-    lblCM15: TLabel;
-    lblCQs: TLabel;
-    lblCQx: TLabel;
-    lblCQy: TLabel;
-    lblCQz: TLabel;
-    lblCM2: TLabel;
-    lblCM3: TLabel;
-    lblCM4: TLabel;
-    lblCM5: TLabel;
-    lblCM6: TLabel;
-    lblCM7: TLabel;
-    lblCM8: TLabel;
-    lblCM9: TLabel;
     lblYaw: TLabel;
     lblPitchValue: TLabel;
     lblRoll: TLabel;
@@ -95,9 +75,12 @@ type
     procedure OpenGLControl2Paint(Sender: TObject);
     procedure OpenGLControl2Resize(Sender: TObject);
     procedure UpdateController(Sender: TObject);
+
   private
     FController: ToglOrbitController;
     FInitDone1, FInitDone2: Boolean;
+    lblCameraMatrix: array[0..15] of TLabel;
+    lblCameraQuaternion: array[0..3] of TLabel;
     procedure DrawCameraHandler(Sender: TObject);
     procedure DrawSceneHandler(Sender: TObject);
     procedure UpdateCameraAngleControls;
@@ -173,7 +156,24 @@ begin
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  i: Integer;
 begin
+  for i := 0 to 15 do
+  begin
+    lblCameraMatrix[i] := TLabel.Create(Self);
+    lblCameraMatrix[i].Alignment := taCenter;
+    lblCameraMatrix[i].Layout := tlCenter;
+    lblCameraMatrix[i].Parent := gbCameraMatrixDisplay;
+  end;
+
+  for i := 0 to 3 do
+  begin
+    lblCameraQuaternion[i] := TLabel.Create(Self);
+    lblCameraQuaternion[i].Alignment := taCenter;
+    lblCameraQuaternion[i].Layout := tlCenter;
+    lblCameraQuaternion[i].Parent := gbCameraQuaternionDisplay;
+  end;
 
   FController := ToglOrbitController.Create;
   FController.OnDrawCamera := @DrawCameraHandler;
@@ -349,28 +349,16 @@ begin
 end;
 
 procedure TMainForm.UpdateMatrixDisplay;
+var
+  i: Integer;
 begin
-  lblCM0.Caption := FormatFloat('0.00', FController.CameraMatrix[0]);
-  lblCM1.Caption := FormatFloat('0.00', FController.CameraMatrix[1]);
-  lblCM2.Caption := FormatFloat('0.00', FController.CameraMatrix[2]);
-  lblCM3.Caption := FormatFloat('0.00', FController.CameraMatrix[3]);
-  lblCM4.Caption := FormatFloat('0.00', FController.CameraMatrix[4]);
-  lblCM5.Caption := FormatFloat('0.00', FController.CameraMatrix[5]);
-  lblCM6.Caption := FormatFloat('0.00', FController.CameraMatrix[6]);
-  lblCM7.Caption := FormatFloat('0.00', FController.CameraMatrix[7]);
-  lblCM8.Caption := FormatFloat('0.00', FController.CameraMatrix[8]);
-  lblCM9.Caption := FormatFloat('0.00', FController.CameraMatrix[9]);
-  lblCM10.Caption := FormatFloat('0.00', FController.CameraMatrix[10]);
-  lblCM11.Caption := FormatFloat('0.00', FController.CameraMatrix[11]);
-  lblCM12.Caption := FormatFloat('0.00', FController.CameraMatrix[12]);
-  lblCM13.Caption := FormatFloat('0.00', FController.CameraMatrix[13]);
-  lblCM14.Caption := FormatFloat('0.00', FController.CameraMatrix[14]);
-  lblCM15.Caption := FormatFloat('0.00', FController.CameraMatrix[15]);
+  for i := 0 to 15 do
+    lblCameraMatrix[i].Caption := FormatFloat('0.00', FController.CameraMatrix[i]);
 
-  lblCQs.Caption := FormatFloat('0.00', FController.CameraQuaternion.S);
-  lblCQx.Caption := FormatFloat('0.00', FController.CameraQuaternion.X);
-  lblCQy.Caption := FormatFloat('0.00', FController.CameraQuaternion.Y);
-  lblCQz.Caption := FormatFloat('0.00', FController.CameraQuaternion.Z);
+  lblCameraQuaternion[0].Caption := FormatFloat('0.00', FController.CameraQuaternion.S);
+  lblCameraQuaternion[1].Caption := FormatFloat('0.00', FController.CameraQuaternion.X);
+  lblCameraQuaternion[2].Caption := FormatFloat('0.00', FController.CameraQuaternion.Y);
+  lblCameraQuaternion[3].Caption := FormatFloat('0.00', FController.CameraQuaternion.Z);
 end;
 
 end.
