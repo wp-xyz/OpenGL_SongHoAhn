@@ -36,7 +36,6 @@
       <Unit>
         <Filename Value="MatrixModelView.lpr"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
       </Unit>
       <Unit>
         <Filename Value="main.pas"/>
@@ -49,14 +48,25 @@
       <Unit>
         <Filename Value="..\..\common\oglcameramodel.pas"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
         <UnitName Value="oglCameraModel"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\common\oglteapotmodel.pas"/>
         <IsPartOfProject Value="True"/>
-        <ResourceBaseClass Value=""/>
         <UnitName Value="oglTeapotModel"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\common\oglabout.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AboutForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="oglAbout"/>
+      </Unit>
+      <Unit>
+        <Filename Value="oglcontroller.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="oglController"/>
       </Unit>
     </Units>
   </ProjectOptions>

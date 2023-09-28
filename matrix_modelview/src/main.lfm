@@ -8,6 +8,7 @@ object MainForm: TMainForm
   ClientWidth = 1121
   LCLVersion = '3.99.0.0'
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   object OpenGLControl: TOpenGLControl
     Left = 0
     Height = 518
@@ -1130,8 +1131,8 @@ object MainForm: TMainForm
     Height = 24
     Scaled = True
     Width = 24
-    Left = 584
-    Top = 688
+    Left = 1000
+    Top = 728
     Bitmap = {
       4C7A010000001800000018000000940400000000000078DA9D556B5054651836
       90CC9AAE160658895D4C9B049529EDAA398297A69A2E804499B78032A82C750A
