@@ -653,7 +653,7 @@ begin
 
   glClearColor(FBackColor[0], FBackColor[1], FBackColor[2], FBackColor[3]);   // background color
   glClearStencil(0);                              // clear stencil buffer
-  glClearDepth(1.0);                             // 0 is near, 1 is far
+  glClearDepth(1.0);                              // 0 is near, 1 is far
   glDepthFunc(GL_LEQUAL);
 
   InitLights();
